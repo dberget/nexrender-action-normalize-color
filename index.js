@@ -5,12 +5,9 @@ module.exports = (job, settings, options, type) => {
   console.log(job);
   console.log(settings);
   console.log(options);
+  console.log(type);
 
-  if (type != "prerender") {
-    throw new Error(
-      `Action ${name} can be only run in prerender mode, you provided: ${type}.`
-    );
-  }
+  settings.logger.log(`Are we here?`);
 
   return new Promise((resolve, reject) => {
     let input = options.input || job.output;
