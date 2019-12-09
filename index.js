@@ -2,19 +2,14 @@ const { name } = require("./package.json");
 const path = require("path");
 
 module.exports = (job, settings, options, type) => {
-  console.log(options);
+  console.log(options.layers);
 
   return new Promise((resolve, reject) => {
-    const colorAssets = job.assets.filter(asset => asset.type == "color");
-
-    console.log(colorAssets);
-
-    colorAssets.forEach(asset => {
-      const index = job.assets.findIndex(x => x.layerName == asset.layerName);
-      const color = hexToRgb(asset.value);
+    options.layers.forEach(asset => {
+      const index = job.assets.findIndex(x => x.layerName == options.layers);
+      const color = hexToRgb(job.assets[index].value);
 
       job.assets[index].value = color;
-      job.assets[index].type = "data";
 
       console.log(job.assets[index]);
     });
