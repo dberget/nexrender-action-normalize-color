@@ -2,25 +2,22 @@ const { name } = require("./package.json");
 const path = require("path");
 
 module.exports = (job, settings, options, type) => {
-  console.log(job);
-  console.log(settings);
   console.log(options);
-  console.log(type);
-
-  settings.logger.log(`Are we here?`);
 
   return new Promise((resolve, reject) => {
-    let input = options.input || job.output;
-    let output = options.output || "encoded.mp4";
+    const colorAssets = job.assets.filter(asset => asset.type == "color");
 
-    if (!path.isAbsolute(input)) input = path.join(job.workpath, input);
-    if (!path.isAbsolute(output)) output = path.join(job.workpath, output);
+    console.log(colorAssets);
 
-    if (options.debug) {
-      settings.logger.log(
-        `[${job.uid}] [action-handbrake] output is set to ${output}`
-      );
-    }
+    colorAssets.forEach(asset => {
+      const index = job.assets.findIndex(x => x.layerName == asset.layerName);
+      const color = hexToRgb(asset.value);
+
+      job.assets[index].value = color;
+      job.assets[index].type = "data";
+
+      console.log(job.assets[index]);
+    });
 
     resolve(job);
   });
