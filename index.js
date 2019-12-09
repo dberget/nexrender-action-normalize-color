@@ -8,7 +8,7 @@ module.exports = (job, settings, options, type) => {
       const color = hexToRgb(job.assets[index].value);
 
       job.assets[index].value = color;
-      options.logger.log(
+      settings.logger.log(
         `changed ${job.assets[index].layerName} value to ${color}`
       );
     });
