@@ -18,9 +18,9 @@ function hexToRgb(hex) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? [
-        round(parseInt(result[1], 16) / 255, 2),
-        rount(parseInt(result[2], 16) / 255, 2),
-        round(parseInt(result[3], 16) / 255, 2)
+        (parseInt(result[1], 16) / 255).toFixed(2),
+        (parseInt(result[2], 16) / 255).toFixed(2),
+        (parseInt(result[3], 16) / 255).toFixed(2)
       ]
     : null;
 }
