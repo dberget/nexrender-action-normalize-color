@@ -23,7 +23,8 @@ function hexToRgb(hex) {
     ? [
         (parseInt(result[1], 16) / 255).toFixed(2),
         (parseInt(result[2], 16) / 255).toFixed(2),
-        (parseInt(result[3], 16) / 255).toFixed(2)
+        (parseInt(result[3], 16) / 255).toFixed(2),
+        1
       ]
     : null;
 }
