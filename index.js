@@ -5,7 +5,9 @@ module.exports = (job, settings, options, type) => {
   return new Promise((resolve, reject) => {
     options.layers.forEach(asset => {
       const index = job.assets.findIndex(x => x.layerName == asset);
-      const color = hexToRgb(job.assets[index].value);
+      const color_string = getColorValue(job.assets[index].value)
+      const color = hexToRgb(color_string);
+
 
       job.assets[index].value = color;
       settings.logger.log(
@@ -27,4 +29,12 @@ function hexToRgb(hex) {
         1
       ]
     : null;
+}
+
+function getColorValue(colorStr){
+  if(!colorStr.startsWith('#')){
+    return colorStr
+  }
+  let editedClr = colorStr.slice(1)
+  return editedClr
 }
